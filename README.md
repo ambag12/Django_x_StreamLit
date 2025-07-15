@@ -65,86 +65,115 @@ REST_FRAMEWORK = {
 python manage.py runserver
 
 ## Authentication
-Signup: POST /usersignup/
-{
-  "user": "username",
-  "password": "pass123"
-}
-Login: POST /userlogin/
-{
-  "user": "username",
-  "password": "pass123"
-}
-Returns access and refresh tokens.
+Signup: POST /api/signup
 
-Token Refresh: POST /api/token/refresh/
-{
-  "refresh": "<refresh_token>"
-}
-Authorization Header:
+Login: POST /api/login
 
-Authorization: Bearer <access_token>
+Token Protected Routes: Add header Authorization: Bearer <access_token>
 ## API Endpoints
-| Method | Endpoint       | Description           |
-| ------ | -------------- | --------------------- |
-| POST   | `/usersignup/` | Register a new user   |
-| GET    | `/usersignup/` | List all users        |
-| GET    | `/user/<id>/`  | Retrieve user details |
-| DELETE | `/user/<id>/`  | Delete a user         |
-| POST   | `/userlogin/`  | Obtain JWT tokens     |
-| Method | Endpoint              | Description    |
-| ------ | --------------------- | -------------- |
-| GET    | `/token_list/`        | List tokens    |
-| POST   | `/token_list/`        | Create token   |
-| GET    | `/token_detail/<id>/` | Retrieve token |
-| PUT    | `/token_detail/<id>/` | Update token   |
-| DELETE | `/token_detail/<id>/` | Delete token   |
+
+### Authentication & Users
+
+| Method | Endpoint         | Description           |
+|--------|------------------|-----------------------|
+| POST   | `/api/signup`    | Register a new user   |
+| POST   | `/api/login`     | Obtain JWT tokens     |
+| GET    | `/api/user-detail/<id>/` | Retrieve user details |
+| DELETE | `/api/user-detail/<id>/` | Delete a user         |
+
+---
+
+### Tokens
+
 | Method | Endpoint                | Description      |
-| ------ | ----------------------- | ---------------- |
-| GET    | `/payment_list/`        | List payments    |
-| POST   | `/payment_list/`        | Create payment   |
-| GET    | `/payment_detail/<id>/` | Retrieve payment |
-| PUT    | `/payment_detail/<id>/` | Update payment   |
-| DELETE | `/payment_detail/<id>/` | Delete payment   |
-| Method | Endpoint               | Description     |
-| ------ | ---------------------- | --------------- |
-| GET    | `/clinic_list/`        | List clinics    |
-| POST   | `/clinic_list/`        | Create clinic   |
-| GET    | `/clinic_detail/<id>/` | Retrieve clinic |
-| PUT    | `/clinic_detail/<id>/` | Update clinic   |
-| DELETE | `/clinic_detail/<id>/` | Delete clinic   |
-| Method | Endpoint             | Description      |
-| ------ | -------------------- | ---------------- |
-| GET    | `/user_list/`        | List patients    |
-| POST   | `/user_list/`        | Create patient   |
-| GET    | `/user_detail/<id>/` | Retrieve patient |
-| PUT    | `/user_detail/<id>/` | Update patient   |
-| DELETE | `/user_detail/<id>/` | Delete patient   |
-| Method | Endpoint                           | Description                 |
-| ------ | ---------------------------------- | --------------------------- |
-| GET    | `/appointmentdisease_list/`        | List links                  |
-| POST   | `/appointmentdisease_list/`        | Link disease to appointment |
-| GET    | `/appointmentdisease_detail/<id>/` | Retrieve link               |
-| PUT    | `/appointmentdisease_detail/<id>/` | Update link                 |
-| DELETE | `/appointmentdisease_detail/<id>/` | Remove link                 |
-| Method | Endpoint               | Description     |
-| ------ | ---------------------- | --------------- |
-| GET    | `/doctor_list/`        | List doctors    |
-| POST   | `/doctor_list/`        | Create doctor   |
-| GET    | `/doctor_detail/<id>/` | Retrieve doctor |
-| PUT    | `/doctor_detail/<id>/` | Update doctor   |
-| DELETE | `/doctor_detail/<id>/` | Delete doctor   |
-| Method | Endpoint                    | Description          |
-| ------ | --------------------------- | -------------------- |
-| GET    | `/appointment_list/`        | List appointments    |
-| POST   | `/appointment_list/`        | Create appointment   |
-| GET    | `/appointment_detail/<id>/` | Retrieve appointment |
-| PUT    | `/appointment_detail/<id>/` | Update appointment   |
-| DELETE | `/appointment_detail/<id>/` | Delete appointment   |
-| Method | Endpoint                      | Description          |
-| ------ | ----------------------------- | -------------------- |
-| GET    | `/medicalrecord_list/`        | List medical records |
-| POST   | `/medicalrecord_list/`        | Create record        |
-| GET    | `/medicalrecord_detail/<id>/` | Retrieve record      |
-| PUT    | `/medicalrecord_detail/<id>/` | Update record        |
-| DELETE | `/medicalrecord_detail/<id>/` | Delete record        |
+|--------|-------------------------|------------------|
+| GET    | `/api/tokenlist/`       | List tokens      |
+| POST   | `/api/tokenlist/`       | Create token     |
+| GET    | `/api/tokendetail/<id>/`| Retrieve token   |
+| PUT    | `/api/tokendetail/<id>/`| Update token     |
+| DELETE | `/api/tokendetail/<id>/`| Delete token     |
+
+---
+
+### Payments
+
+| Method | Endpoint                    | Description        |
+|--------|-----------------------------|--------------------|
+| GET    | `/api/paymentlist/`         | List payments      |
+| POST   | `/api/paymentlist/`         | Create payment     |
+| GET    | `/api/paymentdetail/<id>/`  | Retrieve payment   |
+| PUT    | `/api/paymentdetail/<id>/`  | Update payment     |
+| DELETE | `/api/paymentdetail/<id>/`  | Delete payment     |
+
+---
+
+### Clinics
+
+| Method | Endpoint                      | Description        |
+|--------|-------------------------------|--------------------|
+| GET    | `/api/cliniclist/`            | List clinics       |
+| POST   | `/api/cliniclist/`            | Create clinic      |
+| GET    | `/api/clinicdetails/<id>/`    | Retrieve clinic    |
+| GET    | `/api/clinicdetail/<id>/`     | Duplicate retrieve |
+| PUT    | `/api/clinicdetail/<id>/`     | Update clinic      |
+| DELETE | `/api/clinicdetail/<id>/`     | Delete clinic      |
+
+---
+
+### Patients
+
+| Method | Endpoint                     | Description         |
+|--------|------------------------------|---------------------|
+| GET    | `/api/userlist/`             | List patients       |
+| POST   | `/api/userlist/`             | Create patient      |
+| GET    | `/api/cliniclist/<id>/`      | Retrieve patient    |
+| PUT    | `/api/user-detail/<id>/`     | Update patient      |
+| DELETE | `/api/user-detail/<id>/`     | Delete patient      |
+
+---
+
+### Appointment-Disease Links
+
+| Method | Endpoint                                  | Description              |
+|--------|-------------------------------------------|--------------------------|
+| GET    | `/api/appointmentdiseaselist/`            | List appointment-disease |
+| POST   | `/api/appointmentdiseaselist/`            | Create link              |
+| GET    | `/api/appointmentdiseasedetail/<id>/`     | Retrieve link            |
+| PUT    | `/api/appointmentdiseasedetail/<id>/`     | Update link              |
+| DELETE | `/api/appointmentdiseasedetail/<id>/`     | Delete link              |
+
+---
+
+### Doctors
+
+| Method | Endpoint                   | Description        |
+|--------|----------------------------|--------------------|
+| GET    | `/api/doctors/`            | List doctors       |
+| POST   | `/api/doctors/`            | Create doctor      |
+| GET    | `/api/doctors/<id>/`       | Retrieve doctor    |
+| PUT    | `/api/doctors/<id>/`       | Update doctor      |
+| DELETE | `/api/doctors/<id>/`       | Delete doctor      |
+
+---
+
+### Appointments
+
+| Method | Endpoint                    | Description         |
+|--------|-----------------------------|---------------------|
+| GET    | `/api/appointments/`        | List appointments   |
+| POST   | `/api/appointments/`        | Create appointment  |
+| GET    | `/api/appointments/<id>/`   | Retrieve appointment|
+| PUT    | `/api/appointments/<id>/`   | Update appointment  |
+| DELETE | `/api/appointments/<id>/`   | Delete appointment  |
+
+---
+
+### Medical Records
+
+| Method | Endpoint                        | Description          |
+|--------|---------------------------------|----------------------|
+| GET    | `/api/medicalrecords/`          | List records         |
+| POST   | `/api/medicalrecords/`          | Create medical record|
+| GET    | `/api/medicalrecords/<id>/`     | Retrieve record      |
+| PUT    | `/api/medicalrecords/<id>/`     | Update record        |
+| DELETE | `/api/medicalrecords/<id>/`     | Delete record        |
