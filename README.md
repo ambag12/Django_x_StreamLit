@@ -26,8 +26,6 @@ A Django REST Framework application for managing a healthcare appointment system
   - Doctors
   - Appointments
   - Medical Records
-- **Custom Headers**: Responses include `X-Custom-Header` and `Authorization`.
-- **Swagger UI**: API documentation via `drf-yasg`.
 
 ## Tech Stack
 
@@ -35,7 +33,6 @@ A Django REST Framework application for managing a healthcare appointment system
 - Django 4.x
 - Django REST Framework
 - Simple JWT (`djangorestframework-simplejwt`)
-- drf-yasg
 - bcrypt
 - Requests
 
